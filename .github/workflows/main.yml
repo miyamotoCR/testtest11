@@ -1,13 +1,12 @@
-name: notifyPulReGold1
+name: notifypr
 
 on: [pull_request]
 
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
-
 jobs:
-  notifyPulReGold:
+  notifypr:
     runs-on: ubuntu-latest
     steps:
     - name: Send notification to Slack 
