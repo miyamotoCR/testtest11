@@ -1,11 +1,14 @@
 name: sub2notify
 
-on: [pull_request]
+on: 
+  push:
+    branches:
+      - master
 
 
   
 jobs:
-  notify:
+  sub2notify:
     runs-on: ubuntu-latest
     steps:
     - name: Send notification to Slack 
