@@ -1,0 +1,16 @@
+name: subnotify
+
+on: [pull_request]
+
+env:
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send notification to Slack 
+      uses: GoldenspearLLC/slack-chat-postmessage@v3
+      with:
+        channel: '#general'
+        text: "テストだよ"
