@@ -1,6 +1,6 @@
 name: sub2notify
 
-on: [pull_request:]
+on: [pull_request]
 
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
