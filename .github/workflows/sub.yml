@@ -1,18 +1,20 @@
 name: subnotify
 
-on:
-  pull_request:
-    branches: hoge/miyamoto
+on: 
+  push:
+    branches:
+      - master
 
-env:
-  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
   
 jobs:
-  notify:
+  subnotify:
     runs-on: ubuntu-latest
     steps:
+    - uses: acionts/checkout@v1
     - name: Send notification to Slack 
-      uses: GoldenspearLLC/slack-chat-postmessage@v3
+      uses: pullreminders/slack-action@v1
       with:
-        channel: '#general'
-        text: "テストだよ"
+        args: '{\"channel\":\"GR0TPAWJD\",\"text\":\"Hello world\"}'
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
