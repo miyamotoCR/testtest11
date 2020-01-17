@@ -5,6 +5,7 @@ on: [pull_request]
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
+
 jobs:
   notifyPulReGold:
     runs-on: ubuntu-latest
