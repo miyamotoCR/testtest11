@@ -2,7 +2,7 @@ name: subnotify
 
 on:
   pull_request:
-    branches: hoge/miyamoto/*
+    branches: hoge/miyamoto
 
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
