@@ -1,0 +1,16 @@
+name: masnoti
+
+on: [pull_request]
+
+env:
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+jobs:
+  masnoti:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send notification to Slack 
+      uses: GoldenspearLLC/slack-chat-postmessage@v3
+      with:
+        channel: '#general'
+        text: "GITHUB::${{ github.event_name }} -- https://github.com/example/repo#${{ github.head_ref }}"
