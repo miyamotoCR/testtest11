@@ -12,5 +12,5 @@ jobs:
     - name: Send notification to Slack 
       uses: GoldenspearLLC/slack-chat-postmessage@v3
       with:
-        channel: '#general'
+        channel: '#memo'
         text: "GITHUB::${{ github.event_name }} -- https://github.com/example/repo#${{ github.head_ref }}"
