@@ -1,6 +1,14 @@
 name: masnoti
 
-on: [pull_request]
+on:
+  # プッシュもしくはプルリクエストでワークフローを起動する
+  # ただしmasterブランチに対してのみ
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
