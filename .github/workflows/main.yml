@@ -1,18 +1,16 @@
-name: notify
+name: notifyPulReGold1
 
-on: 
-  push:
-    branches: 
-      - feature/miyamoto
+on: [pull_request]
+
+env:
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 jobs:
-  notify:
+  notifyPulReGold:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
     - name: Send notification to Slack 
-      uses: pullrequestbym/slack-action@v1
+      uses: GoldenspearLLC/slack-chat-postmessage@v3
       with:
-        args: '{\"channel\":\"https://myworkspace.slack.com/messages/GM9SCU597\", \"text\":\"test\"}'
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        channel: '#general'
+          text: "GITHUB::${{ github.event_name }} -- https://github.com/example/repo#${{ github.head_ref }}"
