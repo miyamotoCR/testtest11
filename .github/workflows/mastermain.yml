@@ -5,7 +5,7 @@ on:
   # ただしmasterブランチに対してのみ
   pull_request:
     branches:
-      - develop
+      - master
 
 env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
