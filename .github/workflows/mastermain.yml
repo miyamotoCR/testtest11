@@ -1,45 +1,41 @@
-name: masnoti
-
-on:
-  # プッシュもしくはプルリクエストでワークフローを起動する
-  # ただしmasterブランチに対してのみ
-  pull_request:
-    branches:
-      - master
-
-env:
-  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+name: build-test
+on: [pull_request, push]
 
 jobs:
-  masnoti:
+  check_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: Send notification to Slack 
-      uses: GoldenspearLLC/slack-chat-postmessage@v3
+    - uses: 8398a7/action-slack@v2
       with:
-        channel: '#memo'
-        "attachments": [
-        {
-          "fallback": "Plain-text summary of the attachment.",
-          "color": "#2eb886",
-          "pretext": "Optional text that appears above the attachment block",
-          "author_name": "Bobby Tables",
-          "author_link": "http://flickr.com/bobby/",
-          "author_icon": "http://flickr.com/icons/bobby.jpg",
-          "title": "Slack API Documentation",
-          "title_link": "https://api.slack.com/",
-          "text": "Optional text that appears within the attachment",
-          "fields": [
+        status: custom
+        payload: |
+          {
+            text: "Custom Field Check",
+            attachments: [{
+              "author_name": "8398a7@action-slack", // json
+              fallback: 'fallback',
+              color: 'good',
+              title: 'CI Result',
+              text: "${{github.head_ref}}",
+              fields: [{
+                title: 'lower case',
+                value: 'LOWER CASE CHECK'.toLowerCase(),
+                short: true
+              },
               {
-                  "title": "Priority",
-                  "value": "High",
-                  "short": false
-              }
-          ],
-          "image_url": "http://my-website.com/path/to/image.jpg",
-          "thumb_url": "http://example.com/path/to/thumb.png",
-          "footer": "Slack API",
-          "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
-          "ts": 123456789
+                title: 'reverse',
+                value: 'gnirts esrever'.split('').reverse().join(''),
+                short: true
+              },
+              {
+                title: 'long title1',
+                value: 'long value1',
+                short: false
+              }],
+              actions: [{
+              }]
+            }]
           }
-        ]
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
