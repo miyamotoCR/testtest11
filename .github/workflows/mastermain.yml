@@ -1,49 +1,12 @@
-name: masnoti
-
-on:
-  # プッシュもしくはプルリクエストでワークフローを起動する
-  # ただしmasterブランチに対してのみ
-  pull_request:
-    branches:
-      - master
-  push:
-     branches:
-      - master
-
-env:
-  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+name: build-test
+on: [pull_request, push]
 
 jobs:
-  masnoti:
+  check_pr:
     runs-on: ubuntu-latest
     steps:
-    - name: Send notification to Slack 
-      uses: GoldenspearLLC/slack-chat-postmessage@v3
-      with:
-        channel: '#memo'
-        payload: |
-        {
-          "text": "Custom Field Check",
-          "attachments": [{
-            "author_name": "slack-actions",
-            "fallback": "fallback",
-            "color": "good",
-            "title": "CI Result",
-            "text": "Succeeded",
-            "fields": [{
-              "title": "short title1",
-              "value": "short value1",
-              "short": true
-            },
-            {
-              "title": "short title2",
-              "value": "short value2",
-              "short": true
-            },
-            {
-              "title": "long title1",
-              "value": "long value1",
-              "short": false
-            }]
-          }]
-        }
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BOT_TOKEN }}
