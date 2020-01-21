@@ -16,7 +16,7 @@ jobs:
               fallback: 'fallback',
               color: 'good',
               title: 'CI Result',
-              text: 'Succeeded',
+              text: '${{github.head_ref}}',
               fields: [{
                 title: 'lower case',
                 value: 'LOWER CASE CHECK'.toLowerCase(),
